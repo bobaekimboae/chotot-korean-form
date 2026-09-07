@@ -56,3 +56,6 @@ final result: passed
 
 ## Parts type select update
 Read the six visible source menu entries: motorcycle, car, bicycle, electric vehicle, truck/dump truck and other parts. Replaced the free-text parts field with these Korean options. Browser verification selected truck/dump-truck parts and confirmed the same label in preview. Existing category tests and production build passed. Unsupported legacy select values require a fresh selection.
+
+## Other vehicle type select update
+Captured the source other-vehicle list: Xe chuyên dụng, Khác, Xe khách, xe buýt. Added the three corresponding Korean options in source order. Verified selecting the passenger vehicle/bus option and its preview value. Existing tests and production build passed.
