@@ -53,3 +53,6 @@ The previous motorcycle-only scope is superseded by six vehicle categories obser
 Browser verification exercised all six category transitions, isolation and restoration of Honda versus Hyundai manufacturer values, truck payload restoration, category-aware preview and IndexedDB reload/restore. Five regression tests passed, covering hidden-field validation, truck requirements, current-category export and new/used car conditions; these tests also run in deployment CI.
 Mobile source and implementation were emitted together at 390x844. Evidence: ../../work/qa/truck-source-mobile.png and ../../work/qa/truck-implementation-mobile.png. The two-column truck fields, typography, yellow actions, card spacing and photo-free detail controls were visually reviewed. Native select labels and Korean wrapping intentionally differ; no horizontal overflow was observed. Existing desktop container styling is unchanged.
 final result: passed
+
+## Parts type select update
+Read the six visible source menu entries: motorcycle, car, bicycle, electric vehicle, truck/dump truck and other parts. Replaced the free-text parts field with these Korean options. Browser verification selected truck/dump-truck parts and confirmed the same label in preview. Existing category tests and production build passed. Unsupported legacy select values require a fresh selection.

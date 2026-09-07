@@ -11,9 +11,10 @@ export const categories={
  truck:{label:'트럭 / 덤프트럭',documents:false,minPrice:5000000,fields:[f('brand','트럭 제조사',true),f('payload','적재량',true,['1톤 미만',...Array.from({length:17},(_,i)=>(i+2)+'톤'),'18톤 초과']),year,f('fuel','연료',true,fuel),country,color,km]},
  bicycle:{label:'자전거',documents:false,minPrice:1,fields:[brand,f('bicycleType','자전거 종류',true),country,color,f('frameSize','프레임 크기'),f('frameMaterial','프레임 소재'),guarantee]},
  other:{label:'기타 차량',documents:false,minPrice:1,fields:[f('type','차량 종류',true),year,f('fuel','연료',false,fuel),country,color,guarantee]},
- parts:{label:'차량 부품',documents:false,minPrice:1,fields:[f('partType','부품 종류',true),country]}
+ parts:{label:'차량 부품',documents:false,minPrice:1,fields:[f('partType','부품 종류',true,['오토바이 부품','자동차 부품','자전거 부품','전기 차량 부품','트럭 / 덤프트럭 부품','기타 부품']),country]}
 };
 export const detailKeys=[...new Set(Object.values(categories).flatMap(c=>c.fields.map(f=>f.key)))];
 export function activeFields(category,condition){return categories[category].fields.filter(f=>!f.usedOnly||condition==='중고')}
-export function detailErrors(category,form){const errors={};for(const f of activeFields(category,form.condition)){const value=String(form[f.key]??'').trim();if(f.required&&!value)errors[f.key]='필수 항목을 입력해 주세요.';else if(value&&f.type==='number'&&(!Number.isFinite(Number(value))||Number(value)<0||!Number.isInteger(Number(value))))errors[f.key]='0 이상의 정수를 입력해 주세요.';}return errors}
+export function detailErrors(category,form){const errors={};for(const f of activeFields(category,form.condition)){const value=String(form[f.key]??'').trim();if(f.required&&!value)errors[f.key]='필수 항목을 입력해 주세요.';else if(value&&f.options&&!f.options.includes(value))errors[f.key]='목록에서 선택해 주세요.';else if(value&&f.type==='number'&&(!Number.isFinite(Number(value))||Number(value)<0||!Number.isInteger(Number(value))))errors[f.key]='0 이상의 정수를 입력해 주세요.';}return errors}
 export function currentDetails(category,form){return Object.fromEntries(activeFields(category,form.condition).map(f=>[f.key,form[f.key]??'']))}
+
