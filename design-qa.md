@@ -63,3 +63,5 @@ Captured the source other-vehicle list: Xe chuyên dụng, Khác, Xe khách, xe 
 Truck manufacturer update: matched all 36 options from the original dropdown (brand names retained; Other translated). Verified Isuzu selection in preview, preserved existing Hyundai value, and passed category tests and production build.
 
 Motorcycle manufacturer update: matched the original 84 brands in order. Verified Honda selection and preview in the local browser; category tests and production build passed.
+
+Motorcycle type update: translated the four observed original choices (Tay ga, Xe số, Xe máy điện, Tay côn/Moto) into Korean dropdown options. Verified scooter selection in preview. Category tests and production build passed.
