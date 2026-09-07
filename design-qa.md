@@ -59,3 +59,5 @@ Read the six visible source menu entries: motorcycle, car, bicycle, electric veh
 
 ## Other vehicle type select update
 Captured the source other-vehicle list: Xe chuyên dụng, Khác, Xe khách, xe buýt. Added the three corresponding Korean options in source order. Verified selecting the passenger vehicle/bus option and its preview value. Existing tests and production build passed.
+
+Truck manufacturer update: matched all 36 options from the original dropdown (brand names retained; Other translated). Verified Isuzu selection in preview, preserved existing Hyundai value, and passed category tests and production build.
