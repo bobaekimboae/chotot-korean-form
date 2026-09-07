@@ -47,3 +47,9 @@ The source promotion, private account identity, notifications and real marketpla
 
 ## Default-open update
 User-requested behavior change: the entire motorcycle form is visible immediately, with no prerequisite upload step. Verified by reloading the local page with empty inputs and checking title, price, address, all detail controls and the three bottom actions. Older drafts also restore with details open. Production build passed. Existing layout is unchanged.
+
+## Category-driven forms update
+The previous motorcycle-only scope is superseded by six vehicle categories observed in the source UI: car, motorcycle, truck/dump truck, bicycle, other vehicles and parts. Category-specific fields, used/new conditional controls, preview/export projection and category-specific draft values are implemented. Native select and manual-entry substitutions remain intentional.
+Browser verification exercised all six category transitions, isolation and restoration of Honda versus Hyundai manufacturer values, truck payload restoration, category-aware preview and IndexedDB reload/restore. Five regression tests passed, covering hidden-field validation, truck requirements, current-category export and new/used car conditions; these tests also run in deployment CI.
+Mobile source and implementation were emitted together at 390x844. Evidence: ../../work/qa/truck-source-mobile.png and ../../work/qa/truck-implementation-mobile.png. The two-column truck fields, typography, yellow actions, card spacing and photo-free detail controls were visually reviewed. Native select labels and Korean wrapping intentionally differ; no horizontal overflow was observed. Existing desktop container styling is unchanged.
+final result: passed

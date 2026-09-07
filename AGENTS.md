@@ -9,3 +9,5 @@ When implementing from a selected generated mock, treat that image as the source
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.
 
 User preference: Open the complete motorcycle registration form on first load. Do not gate detail fields behind photo or description entry; restoring older drafts must also keep the details open.
+
+User preference: Selecting a vehicle category must change its detail form, validation, preview and export. Keep the full form open. Preserve common content and cache detail values separately per category.
