@@ -29,3 +29,5 @@ GitHub Pages는 GitHub Actions에서 빌드한 `dist/client`를 배포합니다.
 원본: https://www.chotot.com/dang-tin?category_group=3&ia_version=3
 
 로고와 업로드 아이콘은 원본 페이지에서 확인한 Chợ Tốt 자산이며 해당 권리는 원권리자에게 있습니다. 한국어 글꼴은 Noto Sans KR(SIL OFL), 일반 UI 아이콘은 Lucide(ISC)입니다. 원본 Reddit Sans는 한국어 지원과 자산 다운로드 제한으로 Noto Sans KR로 대체했습니다. 공식 Chợ Tốt 서비스가 아닙니다.
+
+첫 접속부터 사진, 설명, 제목, 가격, 주소와 모든 오토바이 상세 항목을 표시합니다. 사진·설명을 먼저 입력하지 않아도 전체 폼을 볼 수 있습니다.

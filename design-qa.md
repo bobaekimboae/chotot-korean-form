@@ -44,3 +44,6 @@ Focused review used the readable mobile form and preview screenshots for label w
 ## Accepted differences and residual coverage
 
 The source promotion, private account identity, notifications and real marketplace links are excluded or replaced with explanatory interactions. Search and chat are outside this form's scope. Native dropdowns and manual address entry replace remote autocomplete services. Actual AI and live posting are intentionally not implemented. Twenty-file boundary, video codecs, large-file storage limits, and all browser/assistive-technology combinations have not been exhaustively tested.
+
+## Default-open update
+User-requested behavior change: the entire motorcycle form is visible immediately, with no prerequisite upload step. Verified by reloading the local page with empty inputs and checking title, price, address, all detail controls and the three bottom actions. Older drafts also restore with details open. Production build passed. Existing layout is unchanged.

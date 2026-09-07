@@ -11,7 +11,7 @@ function dbAction(mode,value){return new Promise((resolve,reject)=>{const req=in
 function Modal({title,onClose,children}){const ref=useRef();useEffect(()=>{const old=document.activeElement;ref.current.showModal();return()=>old?.focus()},[]);return <dialog ref={ref} onCancel={onClose} onClick={e=>{if(e.target===ref.current)onClose()}}><div className="modal-head"><h2>{title}</h2><button className="icon-button" aria-label="닫기" onClick={onClose}><X/></button></div>{children}</dialog>}
 function Media({item}){const [url,setUrl]=useState('');useEffect(()=>{const u=URL.createObjectURL(item);setUrl(u);return()=>URL.revokeObjectURL(u)},[item]);return item.type.startsWith('video/')?<video src={url || undefined} controls/>:<img src={url || undefined} alt={item.name}/>}
 export function App(){
- const [form,setForm]=useState(initial),[files,setFiles]=useState([]),[documentFile,setDocumentFile]=useState(null),[details,setDetails]=useState(false),[errors,setErrors]=useState({}),[modal,setModal]=useState(''),[notice,setNotice]=useState(''),[draft,setDraft]=useState(null),[dragged,setDragged]=useState(null),[previewIndex,setPreviewIndex]=useState(0),[address,setAddress]=useState('');
+ const [form,setForm]=useState(initial),[files,setFiles]=useState([]),[documentFile,setDocumentFile]=useState(null),[details,setDetails]=useState(true),[errors,setErrors]=useState({}),[modal,setModal]=useState(''),[notice,setNotice]=useState(''),[draft,setDraft]=useState(null),[dragged,setDragged]=useState(null),[previewIndex,setPreviewIndex]=useState(0),[address,setAddress]=useState('');
  const input=useRef(),docInput=useRef(),formRef=useRef();
  const update=(name,value)=>{setForm(f=>({...f,[name]:value}));setErrors(e=>({...e,[name]:''}))};
  useEffect(()=>{dbAction('readonly').then(v=>v&&setDraft(v)).catch(()=>{});},[]);
@@ -21,7 +21,7 @@ export function App(){
  function validate(full=true){const e={};if(!files.some(f=>f.type.startsWith('image/')))e.media='사진을 1장 이상 추가해 주세요.';if(!form.description.trim())e.description='판매글 설명을 입력해 주세요.';if(full){for(const key of ['title','address','brand','model','year','type'])if(!form[key].trim())e[key]='필수 항목을 입력해 주세요.';if(Number(form.price)<1000000)e.price='1,000,000동 이상 입력해 주세요.';if(form.km===''||!Number.isFinite(Number(form.km))||Number(form.km)<0)e.km='0 이상의 주행거리를 입력해 주세요.';}setErrors(e);if(Object.keys(e).length){notify('표시된 필수 항목을 확인해 주세요.');setTimeout(()=>formRef.current?.querySelector('[aria-invalid="true"]')?.focus(),0);return false}return true}
  function next(){if(validate(false)){setDetails(true);notify('차량의 상세 정보를 입력해 주세요.')}}
  async function save(){try{const saved={form,files,documentFile,details,savedAt:new Date().toISOString()};await dbAction('readwrite',saved);setDraft(saved);notify('사진과 입력 내용을 이 브라우저에 임시 저장했습니다.')}catch{notify('저장 공간이 부족하거나 브라우저에서 저장을 허용하지 않습니다.')}}
- const restore=()=>{setForm({...initial,...draft.form});setFiles(draft.files||[]);setDocumentFile(draft.documentFile||null);setDetails(draft.details||false);setErrors({});setModal('');notify('임시 저장한 내용을 불러왔습니다.')};
+ const restore=()=>{setForm({...initial,...draft.form});setFiles(draft.files||[]);setDocumentFile(draft.documentFile||null);setDetails(true);setErrors({});setModal('');notify('임시 저장한 내용을 불러왔습니다.')};
  function download(){const payload={...form,category:'차량 / 오토바이',currency:'VND',images:files.map(f=>f.name),document:documentFile?.name||null};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='판매글-한국어.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
  const openPreview=()=>{setPreviewIndex(0);setModal('preview')};
  function Field({name,label,required=false,type='text',options,suffix,readOnly=false}){return <div className={'field-wrap '+(errors[name]?'has-error':'')}><label className="field"><span>{label}{required&&<b> *</b>}</span>{options?<select value={form[name]} onChange={e=>update(name,e.target.value)} aria-invalid={!!errors[name]}><option value="">선택해 주세요</option>{options.map(o=><option key={o} value={o}>{o}</option>)}</select>:<input value={form[name]} readOnly={readOnly} type={type} min={type==='number'?0:undefined} step={type==='number'?1:undefined} onChange={e=>update(name,e.target.value)} aria-invalid={!!errors[name]} placeholder={label+' 입력'} />}{suffix&&<em>{suffix}</em>}</label>{errors[name]&&<small className="error">{errors[name]}</small>}</div>}
@@ -50,5 +50,6 @@ export function App(){
  </Modal>}
  </>;
 }
+
 
 
